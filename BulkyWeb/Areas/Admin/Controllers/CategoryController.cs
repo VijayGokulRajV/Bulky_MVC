@@ -17,7 +17,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
+            List<Category> objCategoryList = _unitOfWork.Category.GetAll(includeProperties: "Category").ToList();
             return View(objCategoryList);
         }
 
@@ -46,7 +46,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _unitOfWork.Category.Get(item => item.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(item => item.Id == id );
             if (categoryFromDb == null)
             {
                 return NotFound();
@@ -74,7 +74,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _unitOfWork.Category.Get(item => item.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(item => item.Id == id );
             if (categoryFromDb == null)
             {
                 return NotFound();
@@ -84,7 +84,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(int? id)
         {
-            Category? obj = _unitOfWork.Category.Get(item => item.Id == id);
+            Category? obj = _unitOfWork.Category.Get(item => item.Id == id );
             if (obj == null)
             {
                 return NotFound();
